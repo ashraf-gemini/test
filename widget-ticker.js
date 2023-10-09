@@ -1,3 +1,5 @@
+console.log('hey I am called');
+
 const formatSupply = number => {
   const formatter = Intl.NumberFormat("en", { notation: "compact", maximumSignificantDigits: 4 });
 
