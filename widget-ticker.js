@@ -21,16 +21,15 @@ const formatPercentage = number => {
   if (!number) return null;
   return `${number}%`;
 };
-const tickerWidget = document.querySelector(".gemini-ticker-widget");
 
-if (!tickerWidget) {
-  console.log("Ticker widget element not found.");
+const getTickerWidget = () => {
+  const tickerWidget = document.querySelector(".gemini-ticker-widget");
 }
 
-const showTicker = tickerWidget.getAttribute("data-ticker") === "true";
 
 // Utility function to display a loading spinner
 const showLoadingSpinner = () => {
+  const tickerWidget = getTickerWidget();
   const spinnerHtml = `
     <div id="loading-spinner" style="display: flex; justify-content: center; align-items: center; height: 100px;">
       <div class="loader" style="border: 16px solid #f3f3f3; border-top: 16px solid #3498db; border-radius: 50%; width: 60px; height: 60px; animation: spin 2s linear infinite;">
@@ -107,6 +106,7 @@ function fetchDataFromApi(url) {
 
 // Main function to fetch and update data
 const updateTickerData = (coin, baseCurrency, showPercentChange24h) => {
+  const tickerWidget = getTickerWidget();
   const priceFeedApiUrl = "https://api.gemini.com/v1/pricefeed";
   const volumeApiUrl = `https://api.gemini.com/v1/pubticker/${coin.toLowerCase()}${baseCurrency.toLowerCase()}`;
 
@@ -147,6 +147,7 @@ const updateTickerData = (coin, baseCurrency, showPercentChange24h) => {
 
 // Function to apply the theme based on the 'theme' attribute
 const applyTheme = theme => {
+  const tickerWidget = getTickerWidget();
   tickerWidget.style.border = "2px solid #e1e5ea";
   tickerWidget.style.borderRadius = "10px";
   tickerWidget.style.overflow = "hidden";
@@ -166,7 +167,12 @@ const applyTheme = theme => {
 // Entry point to start the ticker
 const startTicker = () => {
   console.log('ticker started');
-  const tickerWidget = document.querySelector(".gemini-ticker-widget");
+  const tickerWidget = getTickerWidget();
+  if (!tickerWidget) {
+    console.log("Ticker widget element not found.");
+  }
+  
+  const showTicker = tickerWidget.getAttribute("data-ticker") === "true";
 
   if (!tickerWidget) {
     console.error("Ticker widget element not found.");
