@@ -24,6 +24,7 @@ const formatPercentage = number => {
 
 const getTickerWidget = () => {
   const tickerWidget = document.querySelector(".gemini-ticker-widget");
+  return tickerWidget;
 }
 
 
