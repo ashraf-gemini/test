@@ -165,6 +165,7 @@ const applyTheme = theme => {
 
 // Entry point to start the ticker
 const startTicker = () => {
+  console.log('ticker started');
   const tickerWidget = document.querySelector(".gemini-ticker-widget");
 
   if (!tickerWidget) {
