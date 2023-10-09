@@ -171,14 +171,10 @@ const startTicker = () => {
   const tickerWidget = getTickerWidget();
   if (!tickerWidget) {
     console.log("Ticker widget element not found.");
+    return;
   }
   
   const showTicker = tickerWidget.getAttribute("data-ticker") === "true";
-
-  if (!tickerWidget) {
-    console.error("Ticker widget element not found.");
-    return;
-  }
 
   // Extract values from data attributes with default fallbacks
   const coin = tickerWidget.getAttribute("data-coin");
